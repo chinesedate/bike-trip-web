@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Homepage from '@/components/Homepage'
+import Homepage from '@/components/pages/HomePage'
 import Trip from '@/components/Trip'
 import Login from '@/components/Login'
 import VueResource from 'vue-resource'

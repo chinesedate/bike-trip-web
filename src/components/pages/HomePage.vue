@@ -9,9 +9,9 @@
 
 </style>
 <script>
-  import TopPage from 'TopPage';
-  import NavPage from 'NavPage';
-  import MainPage from 'MainPage';
+  import TopPage from '../pages/TopPage';
+  import NavPage from '../pages/NavPage';
+  import MainPage from '../pages/MainPage';
 
   export default {
     data() {
