@@ -10,6 +10,7 @@
     top: 56px;
     width: 250px;
     height: 100%;
+    background-color: beige;
   }
 </style>
 <script>
