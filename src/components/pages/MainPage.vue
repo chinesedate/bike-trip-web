@@ -5,12 +5,12 @@
 </template>
 <style>
   #main-page{
-    position: fixed;
-    top: 56px;
-    left: 250px;
     height: 100%;
     width: 100%;
+    margin-right: -17px;
+    margin-bottom: -17px;
     background-color: coral;
+    overflow-y: scroll;
   }
 </style>
 <script>

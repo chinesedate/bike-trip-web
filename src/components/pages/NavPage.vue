@@ -5,9 +5,6 @@
 </template>
 <style>
   #nav-page {
-    position: fixed;
-    left: 0;
-    top: 56px;
     width: 250px;
     height: 100%;
     background-color: beige;
