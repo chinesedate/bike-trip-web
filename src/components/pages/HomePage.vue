@@ -1,51 +1,42 @@
 <template>
   <div>
-    <el-container>
-      <el-header class="bike-header">Header</el-header>
+    <el-container class="page-container">
+
+      <el-container class="side-container">
+        <el-container class="side-scroll-container">
+          <el-aside class="bike-aside">
+            <nav-page></nav-page>
+          </el-aside>
+          <el-footer class="bike-footer">Footer</el-footer>
+        </el-container>
+      </el-container>
 
       <el-container class="main-container">
-        <el-container class="side-container">
-          <el-container class="scroll-container">
-            <el-aside class="bike-aside">
-              <nav-page></nav-page>
-            </el-aside>
-            <el-footer class="bike-footer">Footer</el-footer>
-          </el-container>
+        <el-container class="main-scroll-container">
+          <el-header class="bike-header">Header</el-header>
+          <el-main class="bike-main">
+            <main-page></main-page>
+          </el-main>
         </el-container>
-        <el-main class="bike-main">
-          <main-page></main-page>
-        </el-main>
       </el-container>
+
     </el-container>
 
   </div>
 </template>
 <style>
 
-  .bike-header {
-    height: 56px !important;
-    background-color: white;
-  }
-
-  .main-container {
+  .side-container {
     position: fixed;
     top: 56px;
     bottom: 0;
-    width: 100%;
-  }
-
-  .side-container {
-    margin-top: 0;
-    margin-bottom: 0;
     width: 250px !important;
-
     overflow: hidden;
     flex-grow: 0;
   }
 
-  .scroll-container {
+  .side-scroll-container {
     width: 267px !important;
-
     margin-right: -17px;
     margin-bottom: -17px;
     overflow: scroll;
@@ -55,21 +46,44 @@
     width: 100% !important;
     height: 1000px !important;
     background-color: beige;
+    overflow: hidden;
   }
 
   .bike-footer {
     width: 100% !important;
-    height: 400px !important;
+    height: 200px !important;
     margin-bottom: 0;
     background-color: rebeccapurple;
   }
 
+  .main-container {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+  }
+
+  .main-scroll-container {
+    height: 2000px;
+  }
+
+  .bike-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 17px;
+
+    height: 56px !important;
+    background-color: black;
+  }
+
   .bike-main {
-    margin-right: 0;
-    margin-bottom: 0;
-    height: 1000px !important;
+    margin-top: 56px;
+    height: 2000px !important;
     padding: 0;
-    overflow: hidden;
+
   }
 
 </style>
