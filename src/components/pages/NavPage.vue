@@ -16,7 +16,7 @@
   #nav-page {
     width: 100%;
     height: 100%;
-    background-color: beige;
+    background-color: #F2F6FC;
   }
   .nav-list ul {
     margin-top: 20px;
