@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Homepage from '@/components/pages/HomePage'
 import Trip from '@/components/Trip'
-import Login from '@/components/Login'
+import SignIn from '@/components/SignIn'
+import SignUp from '@/components/SignUp'
 import VueResource from 'vue-resource'
 import Blog from '@/components/Blog'
 
@@ -23,8 +24,13 @@ export default new Router({
     },
     {
       path: '/login',
-      name: 'Login',
-      component: Login
+      name: 'SignIn',
+      component: SignIn
+    },
+    {
+      path:'/join',
+      name:'SignUp',
+      component:SignUp
     },
     {
       path: '/blog/:id',

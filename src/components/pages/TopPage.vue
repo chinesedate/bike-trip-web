@@ -9,7 +9,10 @@
       </div>
     </div>
     <div></div>
-    <div></div>
+    <div class="login-container">
+      <router-link to="/login">登录</router-link>|
+      <router-link to="/join">注册</router-link>
+    </div>
   </div>
 </template>
 <style>
@@ -19,6 +22,7 @@
   }
 
   .logo-container {
+    float: left;
     width: 150px;
     height: 100%;
     margin-left: 30px;
@@ -52,7 +56,6 @@
     width: 120px;
 
   }
-
   .bike-logo {
     display: block;
     float: left;
@@ -60,6 +63,11 @@
     outline: medium none;
     text-indent: -9999em;
     width: 120px
+  }
+  .login-container {
+    float: right;
+    width: 200px;
+    height: 56px;
   }
 </style>
 <script>
