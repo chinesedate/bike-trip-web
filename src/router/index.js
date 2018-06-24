@@ -4,11 +4,9 @@ import Homepage from '@/components/pages/HomePage'
 import Trip from '@/components/Trip'
 import SignIn from '@/components/SignIn'
 import SignUp from '@/components/SignUp'
-import VueResource from 'vue-resource'
 import Blog from '@/components/Blog'
 
 Vue.use(Router)
-Vue.use(VueResource)
 
 export default new Router({
   routes: [
