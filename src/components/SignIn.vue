@@ -116,7 +116,7 @@
     },
     methods: {
       doSignIn: function () {
-        let postData = this.$qs.stringify({
+        let param = this.$qs.stringify({
           userName: this.userName,
           password: this.password
         });
@@ -125,7 +125,7 @@
               'post',
             url:
               '/sign/in',
-            data: postData
+            data: param
           }
         ).then().catch();
       }
