@@ -11,6 +11,7 @@
     <div></div>
     <div v-if="isLogin" class="login-container">
       <router-link to="/login">登录</router-link>
+
       |
       <router-link to="/join">注册</router-link>
     </div>
