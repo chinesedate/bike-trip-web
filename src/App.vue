@@ -6,22 +6,23 @@
 
 <script>
   export default {
-  name: 'App'
-}
+    name: 'App'
+  }
 </script>
 
 <style>
-#app {
-  font-size: 14px;
-  color: #2c3e50;
-  margin-top: 0px;
-  font-family: Microsoft YaHei,SimHei,Tahoma!important;
-}
-  * {
-    padding:0px;
-    margin: 0px;
+  #app {
+    font-size: 14px;
+    color: #2c3e50;
+    font-family: Microsoft YaHei, SimHei, Tahoma !important;
   }
-  html,body,#app {
-    height: 100%;
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  body {
+    background-color: #f9f9f9;
   }
 </style>
