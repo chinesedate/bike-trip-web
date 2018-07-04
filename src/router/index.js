@@ -5,6 +5,7 @@ import Trip from '@/components/Trip'
 import SignIn from '@/components/SignIn'
 import SignUp from '@/components/SignUp'
 import Blog from '@/components/Blog'
+import AddBlog from '@/components/AddBlog'
 
 Vue.use(Router)
 
@@ -31,9 +32,14 @@ export default new Router({
       component:SignUp
     },
     {
-      path: '/blog/:id',
+      path: '/blog/detail/:id',
       name: 'Blog',
       component: Blog
+    },
+    {
+      path:'/blog/add',
+      name:'AddBlog',
+      component:AddBlog
     }
   ]
 })

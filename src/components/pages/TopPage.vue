@@ -9,10 +9,13 @@
       </div>
     </div>
     <div></div>
-    <div class="login-container">
+    <div v-if="isLogin" class="login-container">
       <router-link to="/login">登录</router-link>
       |
       <router-link to="/join">注册</router-link>
+    </div>
+    <div v-else class="add-blog">
+      <router-link to="/blog/add">分享旅程</router-link>
     </div>
   </div>
 </template>
@@ -73,13 +76,20 @@
     padding: 18px 50px;
     text-align: center;
   }
+
+  .add-blog{
+    float: right;
+    width: 200px;
+    padding: 18px 50px;
+    text-align: center;
+  }
 </style>
 <script>
 
   export default {
     data() {
       return {
-        msg: 'hello vue'
+        isLogin:false
       }
     }
   }
