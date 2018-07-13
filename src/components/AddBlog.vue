@@ -63,7 +63,8 @@
           },
           {
             con: "b"
-          }]
+          }],
+        blogContentSave:[]
 
       }
     },
@@ -89,12 +90,21 @@
         // console.log("x:" + event.offsetX + "  y:" + event.offsetY)
       },
       showContent() {
-        for (var a of this.blogContent) {
+        for (let a of this.blogContent) {
+          console.log(a.con)
+        }
+        for (let a of this.blogContentSave) {
           console.log(a.con)
         }
       },
       updateContent(event) {
-        console.log(event.target.innerHTML)
+        var doms = event.target.children
+        // console.log(doms)
+        var temporaryBlogContent = []
+        for (let i = 0; i < doms.length; i++) {
+          temporaryBlogContent.push({con:doms[i].innerText})
+        }
+        this.blogContentSave = temporaryBlogContent
       }
     }
   }
