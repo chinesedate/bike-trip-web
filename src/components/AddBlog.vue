@@ -7,12 +7,15 @@
         <textarea class="blog-title" v-model="blogTitle" @click="blogTitleStatus = false" @blur="showBlogTitleTip"
                   autocomplete="off"></textarea>
       </div>
-      <div class="blog-content-editor" @mouseover="show($event)" @input="updateContent($event)" contenteditable="true">
-        <p v-for="cont in blogContent">
-          {{cont.con}}
-        </p>
+      <div class="blog-content-editor">
+        <quill-editor v-model="content"
+                      :options="editorOption"
+                      @blur="onEditorBlur($event)"
+                      @focus="onEditorFocus($event)"
+                      @ready="onEditorReady($event)">
+        </quill-editor>
       </div>
-      <input class="button" type="button" @click="showContent">
+
     </div>
   </div>
 </template>
