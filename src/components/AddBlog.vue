@@ -10,9 +10,7 @@
       <div class="blog-content-editor">
         <quill-editor v-model="content"
                       :options="editorOption"
-                      @blur="onEditorBlur($event)"
-                      @focus="onEditorFocus($event)"
-                      @ready="onEditorReady($event)">
+                      >
         </quill-editor>
       </div>
 
@@ -67,7 +65,17 @@
           {
             con: "b"
           }],
-        blogContentSave:[]
+        editorOption:{
+          modules:{
+            toolbar:[
+              ['bold', 'italic'],
+              [{'header':2}],
+              [{'list':'ordered'},{'list':'bullet'}],
+              ['link','image','video']
+            ]
+          }
+
+        }
 
       }
     },
@@ -96,18 +104,6 @@
         for (let a of this.blogContent) {
           console.log(a.con)
         }
-        for (let a of this.blogContentSave) {
-          console.log(a.con)
-        }
-      },
-      updateContent(event) {
-        var doms = event.target.children
-        // console.log(doms)
-        var temporaryBlogContent = []
-        for (let i = 0; i < doms.length; i++) {
-          temporaryBlogContent.push({con:doms[i].innerText})
-        }
-        this.blogContentSave = temporaryBlogContent
       }
     }
   }
