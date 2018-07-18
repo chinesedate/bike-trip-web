@@ -34,6 +34,7 @@
             con: "b"
           }],
         editorOption: {
+          placeholder:"请输入正文",
           modules: {
             toolbar: [
               ['bold', 'italic'],
@@ -41,7 +42,8 @@
               [{'list': 'ordered'}, {'list': 'bullet'}],
               ['link', 'image', 'video']
             ]
-          }
+          },
+          scrollingContainer:".blog-content-editor"
 
         },
         content: ""
