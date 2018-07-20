@@ -29,6 +29,33 @@
     </div>
   </div>
 </template>
+<script>
+
+  export default {
+    data() {
+      return {
+        userName: "",
+        password:""
+      }
+    },
+    methods:{
+      signUp:function () {
+        let params =this.$qs.stringify({
+          userName:this.userName,
+          password:this.password
+        });
+        this.$ajax({
+          method:'post',
+          headers:{
+            'Content-Type':'multipart/form-data'
+          },
+          url:'sign/up',
+          data:params
+        }).then().catch();
+      }
+    }
+  }
+</script>
 <style>
   .signup-page {
     height: 100%;
@@ -105,27 +132,3 @@
     margin-top: 30px;
   }
 </style>
-<script>
-
-  export default {
-    data() {
-      return {
-        userName: "",
-        password:""
-      }
-    },
-    methods:{
-      signUp:function () {
-        let param =this.$qs.stringify({
-          userName:this.userName,
-          password:this.password
-        });
-        this.$ajax({
-          method:'post',
-          url:'sign/up',
-          data:param
-        }).then().catch();
-      }
-    }
-  }
-</script>

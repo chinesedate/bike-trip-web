@@ -29,6 +29,33 @@
     </div>
   </div>
 </template>
+<script>
+
+  export default {
+    data() {
+      return {
+        userName: "",
+        password: ""
+      }
+    },
+    methods: {
+      doSignIn: function () {
+        let params = this.$qs.stringify({
+          userName: this.userName,
+          password: this.password
+        });
+        this.$ajax({
+            method:
+              'post',
+            url:
+              '/sign/in',
+            data: params
+          }
+        ).then().catch();
+      }
+    }
+  }
+</script>
 <style>
   .signin-page {
     height: 100%;
@@ -105,30 +132,3 @@
     margin-top: 30px;
   }
 </style>
-<script>
-
-  export default {
-    data() {
-      return {
-        userName: "",
-        password: ""
-      }
-    },
-    methods: {
-      doSignIn: function () {
-        let param = this.$qs.stringify({
-          userName: this.userName,
-          password: this.password
-        });
-        this.$ajax({
-            method:
-              'post',
-            url:
-              '/sign/in',
-            data: param
-          }
-        ).then().catch();
-      }
-    }
-  }
-</script>

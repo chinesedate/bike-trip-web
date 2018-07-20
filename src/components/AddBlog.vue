@@ -12,33 +12,20 @@
       <quill-editor v-model="content"
                     :options="editorOption"
       >
-        <div id="toolbar" slot="toolbar">
-          <!-- Add font size dropdown -->
-          <select class="ql-size">
-            <option value="small"></option>
-            <!-- Note a missing, thus falsy value, is used to reset to default -->
-            <option selected></option>
-            <option value="large"></option>
-            <option value="huge"></option>
-          </select>
-          <!-- Add a bold button -->
-          <button class="ql-bold"></button>
-          <!-- Add subscript and superscript buttons -->
-          <button class="ql-script" value="sub"></button>
-          <button class="ql-script" value="super"></button>
-
-          <button type="button" class="custom-button"  @click.prevent="customClick">
-            <svg viewBox="0 0 18 18">
-              <rect class="ql-stroke" height="10" width="12" x="3" y="4"></rect>
-              <circle class="ql-fill" cx="6" cy="7" r="1"></circle>
-              <polyline class="ql-even ql-fill" points="5 12 5 11 7 9 8 10 11 7 13 9 13 12 5 12"></polyline>
-            </svg>
-          </button>
-
-        </div>
       </quill-editor>
     </div>
     <base-foot class="foot-container"></base-foot>
+    <el-upload
+      class="avatar-uploader"
+      action=""
+      :http-request="imageUpload"
+      name="img"
+      :headers="header"
+      :show-file-list="false"
+      :on-success="uploadSuccess"
+      :on-error="uploadError"
+      :before-upload="beforeUpload">
+    </el-upload>
   </div>
 </template>
 <script>
@@ -57,10 +44,43 @@
           {
             con: "b"
           }],
+        serverUrl: '',  // 这里写你要上传的图片服务器地址
+        header: {token: sessionStorage.token},  // 有的图片服务器要求请求头需要有token之类的参数，写在这里
         editorOption: {
           placeholder: "请输入正文",
           modules: {
-            toolbar: "#toolbar"
+            toolbar: {
+              container: [
+                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+
+                [{'header': 1}, {'header': 2}],               // custom button values
+                [{'list': 'ordered'}, {'list': 'bullet'}],
+                [{'script': 'sub'}, {'script': 'super'}],      // superscript/subscript
+                [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
+                [{'direction': 'rtl'}],                         // text direction
+
+                [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
+                [{'header': [1, 2, 3, 4, 5, 6, false]}],
+
+                [{'color': []}, {'background': []}],          // dropdown with defaults from theme
+                [{'font': []}],
+                [{'align': []}],
+                ['link', 'image', 'video'],
+                ['clean']                                         // remove formatting button
+              ],
+              handlers: {
+                'image': function (value) {
+                  console.log("aaaaaaaaaaaaaaaaaaaa");
+                  if (value) {
+                    // 触发input框选择图片文件
+                    document.querySelector('.avatar-uploader input').click()
+                  } else {
+                    this.quill.format('image', false);
+                  }
+                }
+              }
+            }
           },
           scrollingContainer: ".blog-content-editor"
 
@@ -83,12 +103,30 @@
         // console.log(event.target.innerHTML)
         // console.log("x:" + event.offsetX + "  y:" + event.offsetY)
       },
-      showContent() {
-        for (let a of this.blogContent) {
-          console.log(a.con)
-        }
+      beforeUpload() {
+
       },
-      customClick() {
+      uploadSuccess() {
+
+      },
+      uploadError() {
+
+      },
+      // 覆盖el-upload默认的文件上传行为
+      imageUpload(param) {
+        // let params = this.$qs.stringify({
+        //   file:param.file
+        // });
+        var bodyFormData = new FormData();
+        bodyFormData.set("image",param.file);
+        this.$ajax({
+          method:'post',
+          headers:{
+            'Content-Type':'multipart/form-data'
+          },
+          url:'blog/image/upload',
+          data:bodyFormData
+        }).then().catch();
       }
     }
   }
@@ -134,7 +172,8 @@
     width: 1020px;
     margin: 0 auto;
   }
-  .custom-button{
+
+  .custom-button {
     outline: none;
   }
 </style>
