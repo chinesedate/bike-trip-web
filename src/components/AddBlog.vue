@@ -10,6 +10,7 @@
     </div>
     <div class="blog-content-editor">
       <quill-editor v-model="content"
+                    ref="blogQuillEditor"
                     :options="editorOption"
       >
       </quill-editor>
@@ -71,7 +72,6 @@
               ],
               handlers: {
                 'image': function (value) {
-                  console.log("aaaaaaaaaaaaaaaaaaaa");
                   if (value) {
                     // 触发input框选择图片文件
                     document.querySelector('.avatar-uploader input').click()
@@ -106,19 +106,31 @@
       beforeUpload() {
 
       },
-      uploadSuccess() {
-
+      uploadSuccess(res,file) {
+        // res为图片服务器返回的数据
+        // 获取富文本组件实例
+        let quill = this.$refs.blogQuillEditor.quill
+        // 如果上传成功
+        if (res.status === 1) {
+          // 获取光标所在位置
+          let length = quill.getSelection().index;
+          // 插入图片  res.info为服务器返回的图片地址
+          quill.insertEmbed(length, 'image', res.data)
+          // 调整光标到最后
+          quill.setSelection(length + 1)
+        } else {
+          this.$message.error('图片插入失败')
+        }
+        // loading动画消失
+        this.quillUpdateImg = false
       },
       uploadError() {
 
       },
       // 覆盖el-upload默认的文件上传行为
-      imageUpload(param) {
-        // let params = this.$qs.stringify({
-        //   file:param.file
-        // });
+      imageUpload(item) {
         var bodyFormData = new FormData();
-        bodyFormData.set("image",param.file);
+        bodyFormData.set("image",item.file);
         this.$ajax({
           method:'post',
           headers:{
@@ -126,7 +138,14 @@
           },
           url:'blog/image/upload',
           data:bodyFormData
-        }).then().catch();
+        }).then(function (res) {
+          item.onSuccess(res.data)
+          }
+        ).catch(function (res) {
+          item.onError(res.data)
+          }
+
+        );
       }
     }
   }
