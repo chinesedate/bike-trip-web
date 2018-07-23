@@ -20,7 +20,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
   #top-page {
     width: 100%;
     height: 56px;

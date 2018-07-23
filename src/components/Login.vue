@@ -121,6 +121,112 @@
     </div>
   </div>
 </template>
+
+<script>
+
+  export default {
+    name: "Login",
+    data() {
+      return {
+        msg: 'hello vue',
+        slides: [
+          {
+            src: require('../assets/login/bg1.jpg'),
+            title: 'xxx1',
+          },
+          {
+            src: require('../assets/login/bg2.jpg'),
+            title: 'xxx2'
+          },
+          {
+            src: require('../assets/login/bg3.jpg'),
+            title: 'xxx3'
+          },
+          {
+            src: require('../assets/login/bg4.jpg'),
+            title: 'xxx4'
+          }
+        ],
+        nowIndex: 0,
+        isShow: true,
+        inv: 2000,
+        allIndexBanner:"all-index-banner",
+        isHidden:"hidden",
+        isCurrent:"current",
+        loginVisibleStyle: {
+          display:"block",
+          visibility:"visible",
+          opacity:1
+        },
+        loginHiddenStyle: {
+          display:"none",
+          visibility:"hidden",
+          opacity:1
+        },
+        userName:"",
+        password:""
+      }
+    },
+    computed: {
+      prevIndex() {
+        if (this.nowIndex === 0) {
+          return this.slides.length - 1
+        }
+        else {
+          return this.nowIndex - 1
+        }
+      },
+      nextIndex() {
+        if (this.nowIndex === this.slides.length - 1) {
+          return 0
+        }
+        else {
+          return this.nowIndex + 1
+        }
+      },
+      indexBanner: function () {
+        return "index-banner-" + this.nowIndex
+      }
+    },
+    methods: {
+      goto(index) {
+        this.isShow = false
+        setTimeout(() => {
+          this.isShow = true
+          this.nowIndex = index
+        }, 20)
+      },
+      run() {
+        this.invId = setInterval(() => {
+          this.goto(this.nextIndex)
+        }, this.inv)
+      },
+      clear() {
+        clearInterval(this.invId)
+      },
+      focusContentItemClick:function (index) {
+        this.nowIndex = index
+      },
+      doLogin() {
+        var params = {
+          userName:this.userName,
+          password:this.password
+        }
+        this.$http.post('/sign/in',params, {emulateJSON:true}).then(function(res){
+          this.$router.push("/")
+          },
+          function(){
+
+            this.unmask();
+
+          });
+      }
+    },
+    mounted() {
+      this.run();
+    }
+  }
+</script>
 <style>
   #login-container {
     position: relative;
@@ -543,108 +649,3 @@
   }
 
 </style>
-<script>
-
-  export default {
-    name: "Login",
-    data() {
-      return {
-        msg: 'hello vue',
-        slides: [
-          {
-            src: require('../assets/login/bg1.jpg'),
-            title: 'xxx1',
-          },
-          {
-            src: require('../assets/login/bg2.jpg'),
-            title: 'xxx2'
-          },
-          {
-            src: require('../assets/login/bg3.jpg'),
-            title: 'xxx3'
-          },
-          {
-            src: require('../assets/login/bg4.jpg'),
-            title: 'xxx4'
-          }
-        ],
-        nowIndex: 0,
-        isShow: true,
-        inv: 2000,
-        allIndexBanner:"all-index-banner",
-        isHidden:"hidden",
-        isCurrent:"current",
-        loginVisibleStyle: {
-          display:"block",
-          visibility:"visible",
-          opacity:1
-        },
-        loginHiddenStyle: {
-          display:"none",
-          visibility:"hidden",
-          opacity:1
-        },
-        userName:"",
-        password:""
-      }
-    },
-    computed: {
-      prevIndex() {
-        if (this.nowIndex === 0) {
-          return this.slides.length - 1
-        }
-        else {
-          return this.nowIndex - 1
-        }
-      },
-      nextIndex() {
-        if (this.nowIndex === this.slides.length - 1) {
-          return 0
-        }
-        else {
-          return this.nowIndex + 1
-        }
-      },
-      indexBanner: function () {
-        return "index-banner-" + this.nowIndex
-      }
-    },
-    methods: {
-      goto(index) {
-        this.isShow = false
-        setTimeout(() => {
-          this.isShow = true
-          this.nowIndex = index
-        }, 20)
-      },
-      run() {
-        this.invId = setInterval(() => {
-          this.goto(this.nextIndex)
-        }, this.inv)
-      },
-      clear() {
-        clearInterval(this.invId)
-      },
-      focusContentItemClick:function (index) {
-        this.nowIndex = index
-      },
-      doLogin() {
-        var params = {
-          userName:this.userName,
-          password:this.password
-        }
-        this.$http.post('/sign/in',params, {emulateJSON:true}).then(function(res){
-          this.$router.push("/")
-          },
-          function(){
-
-            this.unmask();
-
-          });
-      }
-    },
-    mounted() {
-      this.run();
-    }
-  }
-</script>

@@ -46,9 +46,6 @@
         });
         this.$ajax({
           method:'post',
-          headers:{
-            'Content-Type':'multipart/form-data'
-          },
           url:'sign/up',
           data:params
         }).then().catch();

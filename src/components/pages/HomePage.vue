@@ -13,7 +13,7 @@
 
       <el-container :class="{'hide-menu':!menuStatus}" class="main-container">
         <el-container class="main-scroll-container">
-          <el-header class="bike-header"><top-page @hide-menu="hideMenu"></top-page></el-header>
+          <el-header class="bike-header"><base-top @hide-menu="hideMenu"></base-top></el-header>
           <el-main class="bike-main">
             <main-page></main-page>
           </el-main>
@@ -24,6 +24,29 @@
 
   </div>
 </template>
+<script>
+  import BaseTop from '../BaseTop';
+  import NavPage from '../pages/NavPage';
+  import MainPage from '../pages/MainPage';
+
+  export default {
+    data() {
+      return {
+        menuStatus:true
+      }
+    },
+    methods:{
+      hideMenu:function () {
+        this.menuStatus = !this.menuStatus;
+      }
+    },
+    components: {
+      'base-top': BaseTop,
+      'nav-page': NavPage,
+      'main-page': MainPage
+    }
+  }
+</script>
 <style>
 
   .side-container {
@@ -96,26 +119,4 @@
   }
 
 </style>
-<script>
-  import TopPage from '../pages/TopPage';
-  import NavPage from '../pages/NavPage';
-  import MainPage from '../pages/MainPage';
 
-  export default {
-    data() {
-      return {
-        menuStatus:true
-      }
-    },
-    methods:{
-      hideMenu:function () {
-        this.menuStatus = !this.menuStatus;
-      }
-    },
-    components: {
-      'top-page': TopPage,
-      'nav-page': NavPage,
-      'main-page': MainPage
-    }
-  }
-</script>
