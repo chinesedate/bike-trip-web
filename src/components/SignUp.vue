@@ -48,7 +48,13 @@
           method:'post',
           url:'sign/up',
           data:params
-        }).then().catch();
+        }).then(
+          function (res) {
+            if (res.data.status ===1) {
+
+            }
+          }
+        ).catch();
       }
     }
   }
