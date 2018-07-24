@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="top-container">
       <slot name="left">
         <div class="logo-container">
           <div class="icon-menu" @click="$emit('hide-menu')">
@@ -34,9 +34,12 @@
     }
 </script>
 <style>
-  #top-page {
+
+  .top-container {
     width: 100%;
     height: 56px;
+    border-bottom: 1px solid #ebebeb;
+    box-shadow: 0 1px 2px hsla(0,0%,60%,.05)
   }
 
   .logo-container {

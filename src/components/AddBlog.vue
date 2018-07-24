@@ -1,20 +1,23 @@
 <template>
   <div class="add-blog-container">
-    <top-page></top-page>
-    <div class="blog-content-container">
-      <div class="blog-title-edit">
-        <span class="blog-title-tip" v-show="blogTitleStatus">请输入标题</span>
-        <textarea class="blog-title" v-model="blogTitle" @click="blogTitleStatus = false" @blur="showBlogTitleTip"
-                  autocomplete="off"></textarea>
+    <base-top></base-top>
+    <div class="content-container">
+      <div class="blog-content-container">
+        <div class="blog-title-edit">
+          <span class="blog-title-tip" v-show="blogTitleStatus">请输入标题</span>
+          <textarea class="blog-title" v-model="blogTitle" @click="blogTitleStatus = false" @blur="showBlogTitleTip"
+                    autocomplete="off"></textarea>
+        </div>
+      </div>
+      <div class="blog-content-editor">
+        <quill-editor v-model="content"
+                      ref="blogQuillEditor"
+                      :options="editorOption"
+        >
+        </quill-editor>
       </div>
     </div>
-    <div class="blog-content-editor">
-      <quill-editor v-model="content"
-                    ref="blogQuillEditor"
-                    :options="editorOption"
-      >
-      </quill-editor>
-    </div>
+
     <base-foot class="foot-container"></base-foot>
     <el-upload
       class="avatar-uploader"
@@ -30,7 +33,7 @@
   </div>
 </template>
 <script>
-  import TopPage from '../components/pages/TopPage';
+  import BaseTop from '../components/BaseTop';
   import BaseFoot from './BaseFoot'
 
   export default {
@@ -67,8 +70,8 @@
                 [{'color': []}, {'background': []}],          // dropdown with defaults from theme
                 [{'font': []}],
                 [{'align': []}],
-                ['link', 'image', 'video'],
-                ['clean']                                         // remove formatting button
+                ['link', 'image', 'video']
+                // ['clean']                                         // remove formatting button
               ],
               handlers: {
                 'image': function (value) {
@@ -90,7 +93,7 @@
       }
     },
     components: {
-      'top-page': TopPage,
+      'base-top': BaseTop,
       'base-foot': BaseFoot
     },
     methods: {
@@ -164,9 +167,12 @@
   .add-blog-container {
     overflow-y: visible;
   }
+  .content-container {
+    margin-top: 38px;
+  }
 
   .blog-content-container {
-    width: 1020px;
+    width: 770px;
     margin: 0 auto;
   }
 
@@ -185,11 +191,15 @@
     line-height: 50px;
     overflow: auto;
     background: 0 0;
+    border-style: hidden hidden solid;
+    border-bottom: 1px solid black;
+    outline: none;
+
   }
 
   .blog-content-editor {
-    width: 1020px;
-    margin: 0 auto;
+    width: 770px;
+    margin: 20px auto 0;
   }
 
   .custom-button {

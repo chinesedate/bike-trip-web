@@ -21,8 +21,4 @@
     padding: 0;
     margin: 0;
   }
-
-  body {
-    background-color: #f9f9f9;
-  }
 </style>
