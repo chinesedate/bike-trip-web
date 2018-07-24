@@ -16,7 +16,7 @@
           <label for="usr">用户名或邮箱</label>
           <input id="usr" class="signin-filed" v-model="userName" autocomplete="off">
           <label for="password">密码</label>
-          <input id="password" class="signin-filed" v-model="password" autocomplete="off">
+          <input id="password" type="password" class="signin-filed" v-model="password" autocomplete="off">
           <el-button class="signin-submit" @click="doSignIn" type="primary">登录</el-button>
         </div>
         <div class="signup-note">
@@ -44,14 +44,21 @@
           userName: this.userName,
           password: this.password
         });
-        this.$ajax({
+        let self = this;
+        self.$ajax({
             method:
               'post',
             url:
               '/sign/in',
             data: params
           }
-        ).then().catch();
+        ).then(
+          function (res) {
+            if (res.data.status === 1) {
+              self.$router.push("/");
+            }
+          }
+        ).catch();
       }
     }
   }

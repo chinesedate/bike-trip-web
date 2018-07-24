@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Vuex from 'vuex'
 import Homepage from '@/components/pages/HomePage'
 import Trip from '@/components/Trip'
 import SignIn from '@/components/SignIn'
@@ -8,6 +9,7 @@ import Blog from '@/components/Blog'
 import AddBlog from '@/components/AddBlog'
 
 Vue.use(Router)
+Vue.use(Vuex)
 
 export default new Router({
   routes: [
