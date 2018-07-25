@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Router from 'vue-router'
+import Vuex from 'vuex'
 import ElementUI from 'element-ui'
 import axios from 'axios'
 import qs from 'qs';
@@ -13,7 +15,8 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
-
+Vue.use(Router)
+Vue.use(Vuex)
 Vue.use(ElementUI)
 Vue.use(VueQuillEditor)
 Vue.config.productionTip = false
@@ -24,6 +27,7 @@ Vue.prototype.$qs = qs;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'
