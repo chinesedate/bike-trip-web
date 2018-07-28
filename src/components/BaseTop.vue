@@ -1,26 +1,32 @@
 <template>
     <div class="top-container">
-      <slot name="left">
-        <div class="logo-container">
+      <div class="content">
+        <div class="logo">
           <div class="icon-menu" @click="$emit('hide-menu')">
-            <!--<i class="el-icon-menu"></i>-->
+
           </div>
           <div class="logo">
             <router-link class="bike-logo" to="/" title="单车记">单车记</router-link>
           </div>
         </div>
-      </slot>
-      <slot name="mid"></slot>
-      <slot name="right">
-        <div v-if="isLogin" class="login-container">
-          <router-link to="/blog/add">分享旅程</router-link>
-        </div>
-        <div v-else class="add-blog">
-          <router-link to="/login">登录</router-link>
-          |
-          <router-link to="/join">注册</router-link>
-        </div>
-      </slot>
+        <div class="menu"></div>
+      </div>
+        <!--<div class="logo-container">-->
+          <!--<div class="icon-menu" @click="$emit('hide-menu')">-->
+            <!--&lt;!&ndash;<i class="el-icon-menu"></i>&ndash;&gt;-->
+          <!--</div>-->
+          <!--<div class="logo">-->
+            <!--<router-link class="bike-logo" to="/" title="单车记">单车记</router-link>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div v-if="isLogin" class="login-container">-->
+          <!--<router-link to="/blog/add">分享旅程</router-link>-->
+        <!--</div>-->
+        <!--<div v-else class="add-blog">-->
+          <!--<router-link to="/login">登录</router-link>-->
+          <!--|-->
+          <!--<router-link to="/join">注册</router-link>-->
+        <!--</div>-->
     </div>
 </template>
 
@@ -28,18 +34,26 @@
     export default{
         data(){
             return{
-              isLogin:false
             }
+        },
+      computed:{
+        isLogin:function () {
+          return this.$store.state.isLogin === '';
         }
+      }
     }
 </script>
 <style>
 
   .top-container {
     width: 100%;
-    height: 56px;
-    border-bottom: 1px solid #ebebeb;
-    box-shadow: 0 1px 2px hsla(0,0%,60%,.05)
+    height: 60px;
+    padding:12px 0;
+  }
+  .content{
+    padding: 0 16px;
+    max-width: 1012px;
+    margin: 0 auto;
   }
 
   .logo-container {

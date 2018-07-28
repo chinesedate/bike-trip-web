@@ -55,6 +55,7 @@
         ).then(
           function (res) {
             if (res.data.status === 1) {
+              self.$store.commit('isLogin',100);
               self.$router.push("/");
             }
           }
