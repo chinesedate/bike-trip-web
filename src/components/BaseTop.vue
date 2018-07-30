@@ -1,16 +1,17 @@
 <template>
     <div class="top-container">
-      <div class="content">
-        <div class="logo">
-          <div class="icon-menu" @click="$emit('hide-menu')">
+      <icon class="wx-icon" name="wx"></icon>
+      <!--<div class="content">-->
+        <!--<div class="logo">-->
+          <!--<div class="icon-menu" @click="$emit('hide-menu')">-->
 
-          </div>
-          <div class="logo">
-            <router-link class="bike-logo" to="/" title="单车记">单车记</router-link>
-          </div>
-        </div>
-        <div class="menu"></div>
-      </div>
+          <!--</div>-->
+          <!--<div class="logo">-->
+            <!--<router-link class="bike-logo" to="/" title="单车记">单车记</router-link>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="menu"></div>-->
+      <!--</div>-->
         <!--<div class="logo-container">-->
           <!--<div class="icon-menu" @click="$emit('hide-menu')">-->
             <!--&lt;!&ndash;<i class="el-icon-menu"></i>&ndash;&gt;-->
@@ -44,6 +45,10 @@
     }
 </script>
 <style>
+  .wx-icon {
+    width: 20px;
+    height: 30px;
+  }
 
   .top-container {
     width: 100%;

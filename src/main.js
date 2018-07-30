@@ -14,6 +14,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+import Icon from 'vue-svg-icon/Icon.vue';
 
 Vue.use(ElementUI)
 Vue.use(VueQuillEditor)
@@ -22,6 +23,7 @@ Vue.config.productionTip = false
 Vue.prototype.$ajax= axios
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 Vue.prototype.$qs = qs;
+Vue.component('icon', Icon);
 
 /* eslint-disable no-new */
 new Vue({
