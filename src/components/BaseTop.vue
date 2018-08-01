@@ -17,35 +17,21 @@
         <div class="d-flex">
           <ul class="user-nav">
             <li class="dropdown"></li>
-            <li class="dropdown"></li>
+            <li class="dropdown">
+              <details class="details-reset d-flex">
+                <summary>
+                  <img src="../assets/user.png" height="20px" width="20px">
+                  <span class="dropdown-caret"></span>
+                </summary>
+                <ul>
+                  <li>f</li>
+                  <li>a</li>
+                </ul>
+              </details>
+            </li>
           </ul>
         </div>
       </div>
-      <!--<div class="logo">-->
-      <!--<div class="icon-menu" @click="$emit('hide-menu')">-->
-
-      <!--</div>-->
-      <!--<div class="logo">-->
-      <!--<router-link class="bike-logo" to="/" title="单车记">单车记</router-link>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div class="menu"></div>-->
-      <!--</div>-->
-      <!--<div class="logo-container">-->
-      <!--<div class="icon-menu" @click="$emit('hide-menu')">-->
-      <!--&lt;!&ndash;<i class="el-icon-menu"></i>&ndash;&gt;-->
-      <!--</div>-->
-      <!--<div class="logo">-->
-      <!--<router-link class="bike-logo" to="/" title="单车记">单车记</router-link>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--<div v-if="isLogin" class="login-container">-->
-      <!--<router-link to="/blog/add">分享旅程</router-link>-->
-      <!--</div>-->
-      <!--<div v-else class="add-blog">-->
-      <!--<router-link to="/login">登录</router-link>-->
-      <!--|-->
-      <!--<router-link to="/join">注册</router-link>-->
     </div>
   </div>
 </template>
@@ -116,52 +102,38 @@
     width: 100%;
     height: 30px;
   }
-  .user-nav{
+
+  .user-nav {
     width: 50px;
+    list-style: none;
   }
 
-  .d-flex{
+  .dropdown {
+    position: relative;
+  }
+
+  .details-reset summary {
+    list-style: none;
+    display: block;
+  }
+
+  .details-reset summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .d-flex {
     display: flex;
   }
 
-  /*.icon-menu i {*/
-  /*font-size: 20px;*/
-  /*}*/
-  /*.logo {*/
-  /*float: left;*/
-  /*width: 130px;*/
-  /*height: 56px;*/
-  /*}*/
-  /*.logo {*/
-  /*background: url(../assets/logo.png) no-repeat scroll 0 transparent;*/
-  /*margin: 20px 0 0;*/
-  /*float: left;*/
-  /*height: 36px;*/
-  /*overflow: hidden;*/
-  /*width: 120px;*/
-
-  /*}*/
-
-  /*.bike-logo {*/
-  /*display: block;*/
-  /*float: left;*/
-  /*height: 56px;*/
-  /*outline: medium none;*/
-  /*text-indent: -9999em;*/
-  /*width: 120px*/
-  /*}*/
-
-  /*.login-container {*/
-  /*float: right;*/
-  /*width: 200px;*/
-  /*padding: 18px 50px;*/
-  /*text-align: center;*/
-  /*}*/
-
-  /*.add-blog{*/
-  /*float: right;*/
-  /*width: 200px;*/
-  /*padding: 18px 50px;*/
-  /*text-align: center;*/
-  /*}*/
+  .dropdown-caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    content: "";
+    border: 4px solid;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
 </style>
