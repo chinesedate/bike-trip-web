@@ -9,8 +9,16 @@ const store =  new Vuex.Store({
     isLogin:""
   },
   mutations:{
-    isLogin(state, msg) {
-      state.isLogin = msg;
+    login(state, payload) {
+      state.isLogin = payload.msg;
+      if (window.localStorage) {
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + payload.time);
+        localStorage.setItem('isLogin',payload.msg);
+        localStorage.setItem('deadline',payload.time);
+      } else {
+        alert('This browser does NOT support localStorage');
+      }
+
     }
   }
 })

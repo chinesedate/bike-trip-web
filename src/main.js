@@ -20,7 +20,7 @@ Vue.use(ElementUI)
 Vue.use(VueQuillEditor)
 Vue.use(base)
 Vue.config.productionTip = false
-Vue.prototype.$ajax= axios
+Vue.prototype.$ajax = axios
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 Vue.prototype.$qs = qs;
 Vue.component('icon', Icon);
@@ -30,14 +30,28 @@ new Vue({
   el: '#app',
   store,
   router,
-  components: { App },
+  components: {App},
   template: '<App/>',
-  created(){
+  created() {
     //判断是否有本地存储中是否有isLogin，并更新vuex仓库
-    if(this.getToken('isLogin') == null){
-      this.setToken('isLogin','')
+    console.log("ddddffffdd:" + this.getToken('isLogin'))
+    console.log("dddddd:" + this.getToken('deadline'))
+    if (this.getToken('isLogin') == null) {
+      this.setToken('isLogin', '');
     }
-    this.$store.state.isLogin = this.getToken('isLogin')
+    if (this.getToken('deadline') == null) {
+      this.setToken('deadline', '0');
+    }
+    // 一个小时过期
+    if (new Date().getTime() - parseInt(this.getToken('deadline')) > 3600 * 1000) {
+      this.setToken('isLogin', '');
+    }
+
+    console.log("bbbbbb:" + parseInt(this.getToken('deadline')))
+    console.log("ccccc:" + new Date().getTime())
+    console.log("aaaaaa:" + (new Date().getTime() -parseInt(this.getToken('deadline'))))
+    this.$store.state.isLogin = this.getToken('isLogin');
+    this.$store.state.deadline = this.getToken('deadline');
     console.log(this.$store.state.isLogin)
   }
 })

@@ -44,6 +44,7 @@
           userName:this.userName,
           password:this.password
         });
+        let self = this;
         this.$ajax({
           method:'post',
           url:'sign/up',
@@ -51,7 +52,8 @@
         }).then(
           function (res) {
             if (res.data.status ===1) {
-
+              self.$store.commit('login',100, new Date().getTime());
+              self.$router.push("/");
             }
           }
         ).catch();

@@ -15,19 +15,22 @@
           </div>
         </div>
         <div class="d-flex">
-          <ul class="user-nav">
-            <li class="dropdown"></li>
+          <ul class="user-nav d-flex">
             <li class="dropdown">
-              <details class="details-reset d-flex">
-                <summary>
+              <div  v-if="isLogin" class="details-reset d-flex" @click.stop="showDetails">
+                <div>
                   <img src="../assets/user.png" height="20px" width="20px">
                   <span class="dropdown-caret"></span>
-                </summary>
-                <ul>
-                  <li>f</li>
-                  <li>a</li>
+                </div>
+                <ul v-if="showUserDropdown" class="user-dropdown-ul" v-click-outside="showDetails">
+                  <li>游记</li>
                 </ul>
-              </details>
+              </div>
+              <div v-else>
+                <router-link to="/login">登录</router-link>
+                |
+                <router-link to="/join">注册</router-link>
+              </div>
             </li>
           </ul>
         </div>
@@ -39,11 +42,38 @@
 <script>
   export default {
     data() {
-      return {}
+      return {
+        showUserDropdown: false
+      }
     },
+    // created: function() {
+    //   this.$on("closeEvent",this.showDetails());
+    // },
     computed: {
       isLogin: function () {
-        return this.$store.state.isLogin === '';
+        return this.$store.state.isLogin !== '';
+      }
+    },
+    methods: {
+      showDetails: function () {
+        this.showUserDropdown = !this.showUserDropdown;
+      }
+    },
+    directives: {
+      'click-outside': {
+        bind: function (el, binding, vnode) {
+          el.clickOutsideEvent = function (event) {
+            // here I check that click was outside the el and his childrens
+            if (!(el == event.target || el.contains(event.target))) {
+              // and if it did, call method provided in attribute value
+              vnode.context[binding.expression](event);
+            }
+          };
+          document.body.addEventListener('click', el.clickOutsideEvent)
+        },
+        unbind: function (el) {
+          document.body.removeEventListener('click', el.clickOutsideEvent)
+        },
       }
     }
   }
@@ -51,7 +81,7 @@
 <style>
   .top {
     width: 100%;
-    padding: 12px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #ebebeb;
     box-shadow: 0 1px 2px hsla(0, 0%, 60%, .05);
   }
@@ -104,8 +134,12 @@
   }
 
   .user-nav {
-    width: 50px;
+    width: 200px;
     list-style: none;
+    align-items: center;
+  }
+  .user-nav li {
+    float:left;
   }
 
   .dropdown {
@@ -135,5 +169,15 @@
     border-right-color: transparent;
     border-bottom-color: transparent;
     border-left-color: transparent;
+  }
+
+  .user-dropdown-ul {
+    position: absolute;
+    top: 20px;
+
+  }
+
+  .user-nav ul {
+    list-style: none;
   }
 </style>

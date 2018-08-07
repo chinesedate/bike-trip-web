@@ -1,36 +1,15 @@
 <template>
   <div>
-    <!--<el-container class="page-container">-->
-
-    <!--<el-container v-if="menuStatus" class="side-container">-->
-    <!--<el-container class="side-scroll-container">-->
-    <!--<el-aside class="bike-aside">-->
-    <!--<nav-page></nav-page>-->
-    <!--</el-aside>-->
-    <!--<el-footer class="bike-footer">Footer</el-footer>-->
-    <!--</el-container>-->
-    <!--</el-container>-->
-
-    <!--<el-container :class="{'hide-menu':!menuStatus}" class="main-container">-->
-    <!--<el-container class="main-scroll-container">-->
-    <!--<el-header class="bike-header"><base-top @hide-menu="hideMenu"></base-top></el-header>-->
-    <!--<el-main class="bike-main">-->
-    <!--<main-page></main-page>-->
-    <!--</el-main>-->
-    <!--</el-container>-->
-    <!--</el-container>-->
-
-    <!--</el-container>-->
     <el-container class="page-container">
       <el-header class="bike-header">
         <base-top></base-top>
       </el-header>
-      <!--<el-main class="bike-main">-->
-        <!--<main-page></main-page>-->
-      <!--</el-main>-->
-      <!--<el-footer class="bike-footer">-->
-        <!--<base-foot></base-foot>-->
-      <!--</el-footer>-->
+      <el-main class="bike-main">
+        <main-page></main-page>
+      </el-main>
+      <el-footer class="bike-footer">
+        <base-foot></base-foot>
+      </el-footer>
     </el-container>
 
   </div>
