@@ -6,6 +6,7 @@ import SignIn from '@/components/SignIn'
 import SignUp from '@/components/SignUp'
 import Blog from '@/components/Blog'
 import AddBlog from '@/components/AddBlog'
+import RideTeam from '@/components/pages/RideTeam'
 
 
 Vue.use(Router)
@@ -41,6 +42,11 @@ export default new Router({
       path:'/blog/add',
       name:'AddBlog',
       component:AddBlog
+    },
+    {
+      path:'/ride/team',
+      name:'RideTeam',
+      component:RideTeam
     }
   ]
 })

@@ -12,7 +12,6 @@ const store =  new Vuex.Store({
     login(state, payload) {
       state.isLogin = payload.msg;
       if (window.localStorage) {
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + payload.time);
         localStorage.setItem('isLogin',payload.msg);
         localStorage.setItem('deadline',payload.time);
       } else {

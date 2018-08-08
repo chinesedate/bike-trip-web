@@ -34,8 +34,6 @@ new Vue({
   template: '<App/>',
   created() {
     //判断是否有本地存储中是否有isLogin，并更新vuex仓库
-    console.log("ddddffffdd:" + this.getToken('isLogin'))
-    console.log("dddddd:" + this.getToken('deadline'))
     if (this.getToken('isLogin') == null) {
       this.setToken('isLogin', '');
     }
@@ -47,11 +45,7 @@ new Vue({
       this.setToken('isLogin', '');
     }
 
-    console.log("bbbbbb:" + parseInt(this.getToken('deadline')))
-    console.log("ccccc:" + new Date().getTime())
-    console.log("aaaaaa:" + (new Date().getTime() -parseInt(this.getToken('deadline'))))
     this.$store.state.isLogin = this.getToken('isLogin');
     this.$store.state.deadline = this.getToken('deadline');
-    console.log(this.$store.state.isLogin)
   }
 })
