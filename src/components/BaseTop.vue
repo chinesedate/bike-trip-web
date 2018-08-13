@@ -23,7 +23,7 @@
                   <span class="dropdown-caret"></span>
                 </div>
                 <ul v-if="showUserDropdown" class="user-dropdown-ul" v-click-outside="showDetails">
-                  <li><router-link to="/blog/add">游记</router-link></li>
+                  <li><router-link to="/blog/edit">游记</router-link></li>
                   <li><router-link to="/ride/team">组队</router-link></li>
                 </ul>
               </div>
