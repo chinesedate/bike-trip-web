@@ -1,6 +1,9 @@
 <template>
   <div class="add-blog-container">
     <base-top></base-top>
+    <div class="content-save-container">
+      <input type="button" value="保存">
+    </div>
     <div class="content-container">
       <div class="blog-content-container">
         <div class="blog-title-edit">
@@ -166,6 +169,13 @@
 <style scoped>
   .add-blog-container {
     overflow-y: visible;
+  }
+  .content-save-container{
+    position:fixed;
+    top: 150px;
+    right: 100px;
+    width: 40px;
+    height: 40px;
   }
   .content-container {
     margin-top: 38px;
