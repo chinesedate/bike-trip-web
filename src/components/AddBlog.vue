@@ -2,7 +2,7 @@
   <div class="add-blog-container">
     <base-top></base-top>
     <div class="content-save-container">
-      <input type="button" value="保存">
+      <input type="button" value="保存" @click="saveContent()">
     </div>
     <div class="content-container">
       <div class="blog-content-container">
@@ -44,6 +44,7 @@
       return {
         blogTitleStatus: true,
         blogTitle: "",
+        content: "",
         blogContent: [
           {
             con: "a"
@@ -90,8 +91,7 @@
           },
           scrollingContainer: ".blog-content-editor"
 
-        },
-        content: ""
+        }
 
       }
     },
@@ -152,6 +152,27 @@
           }
 
         );
+      },
+      saveContent() {
+        var blogData = new FormData();
+        blogData.set("title", this.blogTitle);
+        blogData.set("content", this.content);
+        this.$ajax({
+          method:'post',
+          headers:{
+            'Content-Type':'multipart/form-data'
+          },
+          url:'/blog/content/save',
+          data:blogData
+        }).then(function (res) {
+            item.onSuccess(res.data)
+          }
+        ).catch(function (res) {
+            item.onError(res.data)
+          }
+
+        );
+
       }
     }
   }
