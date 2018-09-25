@@ -5,6 +5,18 @@
       <input type="button" value="保存" @click="saveContent()">
     </div>
     <div class="content-container">
+      <div class="blog-title-image-container">
+        <el-upload
+          class="avatar-uploader"
+          action=""
+          :http-request="imageUpload"
+          :show-file-list="false"
+          :on-success="uploadSuccessTitleImage"
+          :before-upload="beforeUpload">
+          <img v-if="titleImageUrl" :src="titleImageUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+      </div>
       <div class="blog-content-container">
         <div class="blog-title-edit">
           <span class="blog-title-tip" v-show="blogTitleStatus">请输入标题</span>
@@ -23,7 +35,7 @@
 
     <base-foot class="foot-container"></base-foot>
     <el-upload
-      class="avatar-uploader"
+      class="avatar-uploader-hide"
       action=""
       :http-request="imageUpload"
       name="img"
@@ -81,7 +93,7 @@
                 'image': function (value) {
                   if (value) {
                     // 触发input框选择图片文件
-                    document.querySelector('.avatar-uploader input').click()
+                    document.querySelector('.avatar-uploader-hide input').click()
                   } else {
                     this.quill.format('image', false);
                   }
@@ -91,8 +103,8 @@
           },
           scrollingContainer: ".blog-content-editor"
 
-        }
-
+        },
+        titleImageUrl:""   // 题图地址
       }
     },
     components: {
@@ -112,7 +124,7 @@
       beforeUpload() {
 
       },
-      uploadSuccess(res,file) {
+      uploadSuccess(res, file) {
         // res为图片服务器返回的数据
         // 获取富文本组件实例
         let quill = this.$refs.blogQuillEditor.quill
@@ -136,43 +148,59 @@
       // 覆盖el-upload默认的文件上传行为
       imageUpload(item) {
         var bodyFormData = new FormData();
-        bodyFormData.set("image",item.file);
+        bodyFormData.set("image", item.file);
         this.$ajax({
-          method:'post',
-          headers:{
-            'Content-Type':'multipart/form-data'
+          method: 'post',
+          headers: {
+            'Content-Type': 'multipart/form-data'
           },
-          url:'blog/image/upload',
-          data:bodyFormData
-        }).then(function (res) {
-          item.onSuccess(res.data)
-          }
-        ).catch(function (res) {
-          item.onError(res.data)
-          }
-
-        );
-      },
-      saveContent() {
-        var blogData = new FormData();
-        blogData.set("title", this.blogTitle);
-        blogData.set("content", this.content);
-        this.$ajax({
-          method:'post',
-          headers:{
-            'Content-Type':'multipart/form-data'
-          },
-          url:'/blog/content/save',
-          data:blogData
+          url: 'blog/image/upload',
+          data: bodyFormData
         }).then(function (res) {
             item.onSuccess(res.data)
           }
         ).catch(function (res) {
             item.onError(res.data)
           }
-
+        );
+      },
+      // 题图上传成功后动作
+      uploadSuccessTitleImage(res, file) {
+        // res为图片服务器返回的数据
+        // 如果上传成功
+        if (res.status === 1) {
+          this.titleImageUrl = res.data;
+        } else {
+          this.$message.error('图片插入失败')
+        }
+      },
+      saveContent() {
+        var blogData = new FormData();
+        blogData.set("titleImageUrl", this.titleImageUrl);
+        blogData.set("title", this.blogTitle);
+        blogData.set("content", this.content);
+        this.$ajax({
+          method: 'post',
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          url: '/blog/content/save',
+          data: blogData
+        }).then(function (res) {
+            item.onSuccess(res.data)
+          }
+        ).catch(function (res) {
+            item.onError(res.data)
+          }
         );
 
+      },
+    },
+    directives:{
+      focus:{
+       inserted:function () {
+
+       }
       }
     }
   }
@@ -191,13 +219,15 @@
   .add-blog-container {
     overflow-y: visible;
   }
-  .content-save-container{
-    position:fixed;
+
+  .content-save-container {
+    position: fixed;
     top: 150px;
     right: 100px;
     width: 40px;
     height: 40px;
   }
+
   .content-container {
     margin-top: 38px;
   }
@@ -235,5 +265,39 @@
 
   .custom-button {
     outline: none;
+  }
+
+  .blog-title-image-container{
+    width: 770px;
+    margin: 0 auto;
+  }
+
+  .blog-title-image-container {
+    width: 770px;
+    height: 178px;
+  }
+
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 770px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 770px;
+    height: 178px;
+    display: block;
   }
 </style>

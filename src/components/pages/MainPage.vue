@@ -3,7 +3,10 @@
     <ul class="blog-container" v-for="(blog, index) in blogList">
       <li>
         <p class="blog-title" v-html="blog.title"></p>
-        <p v-html="blog.content"></p>
+        <div class="blog-content">
+          <img v-if="blog.titleImageUrl" :src="blog.titleImageUrl">
+          <p v-html="blog.content"></p>
+        </div>
       </li>
     </ul>
   </div>
@@ -17,6 +20,10 @@
     list-style: none;
     width: 1000px;
     margin: 0 auto;
+  }
+  .blog-content{
+    width: 770px;
+    height: 200px;
   }
   .blog-title{
     font-size: medium;
