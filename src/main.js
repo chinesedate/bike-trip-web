@@ -33,7 +33,7 @@ new Vue({
   components: {App},
   template: '<App/>',
   created() {
-    //判断是否有本地存储中是否有isLogin，并更新vuex仓库
+    //判断本地存储中是否有isLogin，并更新vuex仓库
     if (this.getToken('isLogin') == null) {
       this.setToken('isLogin', '');
     }
@@ -47,5 +47,13 @@ new Vue({
 
     this.$store.state.isLogin = this.getToken('isLogin');
     this.$store.state.deadline = this.getToken('deadline');
+
+
+    // 判断本地存储中是否有tabNum，并更新vuex仓库
+    if (this.getToken('tabNum') == null) {
+      this.setToken('tabNum', '1');
+    }
+
+    this.$store.state.tabNum = this.getToken('tabNum');
   }
 })

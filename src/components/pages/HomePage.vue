@@ -7,9 +7,9 @@
       <el-main class="bike-main">
         <main-page></main-page>
       </el-main>
-      <el-footer class="bike-footer">
-        <base-foot></base-foot>
-      </el-footer>
+      <!--<el-footer class="bike-footer">-->
+        <!--<base-foot></base-foot>-->
+      <!--</el-footer>-->
     </el-container>
 
   </div>
