@@ -19,7 +19,11 @@
           </ul>
         </div>
         <div class="blog-container">
-
+          <div v-for="(blog,index) in blogList" class="blog-item">
+            <h2 class="blog-title">
+              <router-link to="/">{{blog.title}}</router-link>
+            </h2>
+          </div>
         </div>
       </div>
       <div class="right-container"></div>
@@ -94,7 +98,7 @@
     content: " ";
   }
 
-  .blog-container{
+  .blog-container {
     min-height: 100vh;
   }
 
