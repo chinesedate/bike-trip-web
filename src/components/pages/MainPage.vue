@@ -22,6 +22,7 @@
           <div v-for="(blog,index) in blogList" class="blog-item">
             <h2 class="blog-title">
               <router-link to="/">{{blog.title}}</router-link>
+              <div class="blog-main"></div>
             </h2>
           </div>
         </div>
