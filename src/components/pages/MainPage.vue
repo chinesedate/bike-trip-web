@@ -22,22 +22,20 @@
           <div v-for="(blog,index) in blogList" class="blog-item">
             <h2 class="blog-title">
               <router-link to="/">{{blog.title}}</router-link>
-              <div class="blog-main"></div>
+              <div class="blog-main">
+                <div v-if="blog.titleImageUrl" class="blog-title-image">
+                  <div class="blog-title-image-inner"><img :src="blog.titleImageUrl"></div>
+                </div>
+                <div class="blog-content">
+                  <span class="blog-content-text" v-html="blog.content"></span>
+                </div>
+              </div>
             </h2>
           </div>
         </div>
       </div>
       <div class="right-container"></div>
     </div>
-    <!--<div class="blog-container" v-for="(blog, index) in blogList">-->
-    <!--<div class="blog-item">-->
-    <!--<p class="blog-title" v-html="blog.title"></p>-->
-    <!--<div class="blog-content">-->
-    <!--<img v-if="blog.titleImageUrl" :src="blog.titleImageUrl">-->
-    <!--<p v-html="blog.content"></p>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
   </div>
 </template>
 <style>
@@ -103,26 +101,66 @@
     min-height: 100vh;
   }
 
+  .blog-main {
+    cursor: pointer;
+    line-height: 1.67;
+  }
+
+  .blog-title-image {
+    position: relative;
+    width: 190px;
+    height: 105px;
+    margin-top: -2px;
+    margin-right: 18px;
+    margin-bottom: 4px;
+    float: left;
+    overflow: hidden;
+    background-position: 50%;
+    background-size: cover;
+    border-radius: 4px;
+    transform: translateZ(0);
+  }
+
+  .blog-title-image:after {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 26, 26, 0.2);
+    content: '';
+  }
+
+  .blog-title-image-inner {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform: translateY(-50%);
+    overflow: hidden;
+  }
+
+  .blog-title-image-inner img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  .blog-content {
+    max-height: 100px;
+    margin-top: 16px;
+    margin-bottom: -4px;
+    overflow: hidden;
+  }
+
   .right-container {
     flex: 1;
     font-size: 14px;
   }
 
-  /*.blog-container{*/
-  /*list-style: none;*/
-  /*width: 1000px;*/
-  /*margin: 0 auto;*/
-  /*}*/
-  /*.blog-item{*/
-  /*padding:20px;*/
-  /*}*/
-  /*.blog-content{*/
-  /*width: 770px;*/
-  /*height: 200px;*/
-  /*}*/
-  /*.blog-title{*/
-  /*font-size: medium;*/
-  /*}*/
 </style>
 <script>
   export default {
