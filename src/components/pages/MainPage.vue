@@ -27,7 +27,7 @@
                   <div class="blog-title-image-inner"><img :src="blog.titleImageUrl"></div>
                 </div>
                 <div class="blog-content">
-                  <span class="blog-content-text" v-html="blog.content"></span>
+                  <span class="blog-content-text" v-html="blog.briefIntroduction"></span>
                 </div>
               </div>
             </h2>
