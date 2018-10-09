@@ -22,15 +22,16 @@
           <div v-for="(blog,index) in blogList" class="blog-item">
             <h2 class="blog-title">
               <router-link to="/">{{blog.title}}</router-link>
-              <div class="blog-main">
-                <div v-if="blog.titleImageUrl" class="blog-title-image">
-                  <div class="blog-title-image-inner"><img :src="blog.titleImageUrl"></div>
-                </div>
-                <div class="blog-content">
-                  <span class="blog-content-text" v-html="blog.briefIntroduction"></span>
-                </div>
-              </div>
             </h2>
+            <div class="blog-main">
+              <div v-if="blog.titleImageUrl" class="blog-title-image">
+                <div class="blog-title-image-inner"><img :src="blog.titleImageUrl"></div>
+              </div>
+              <div class="blog-content">
+                <span class="blog-content-text" v-html="blog.briefIntroduction"></span>
+              </div>
+              <div class="blog-actions"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -154,6 +155,10 @@
     margin-top: 16px;
     margin-bottom: -4px;
     overflow: hidden;
+  }
+
+  .blog-actions {
+    clear: both;
   }
 
   .right-container {
