@@ -43,6 +43,7 @@
   #main-page {
     height: 100%;
     width: 100%;
+    overflow: hidden;
   }
 
   .main-container {
