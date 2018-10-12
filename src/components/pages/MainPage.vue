@@ -21,7 +21,7 @@
         <div class="blog-container">
           <div v-for="(blog,index) in blogList" class="blog-item">
             <h2 class="blog-title">
-              <router-link to="/">{{blog.title}}</router-link>
+              <router-link :to="{name:'Blog', params:{id:blog.autoId}}">{{blog.title}}</router-link>
             </h2>
             <div class="blog-main">
               <div v-if="blog.titleImageUrl" class="blog-title-image">
