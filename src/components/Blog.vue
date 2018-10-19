@@ -1,28 +1,44 @@
 <template>
   <div>
     <base-top></base-top>
-    <div class="deatil-wrap">
+    <div class="deatil-wrap clearfix">
       <div class="side-left">
-        <div class="caption">
-          {{blog.title}}
-        </div>
-        <div class="caption-sub">
-          <div class="caption-info"></div>
-          <div class="caption-numbers">
-            <span class="view-count">阅读 123
-            </span>
-            <span class="like-count">点赞 25
-            </span>
+        <h1>{{blog.title}}</h1>
+        <div class="content clearfix">
+          <div class="left-tool">
+            <div class="tool-wrap">
+              <div class="year">
+                <span>{{blog.createdAt | dateFormat("YEAR")}}</span>
+              </div>
+              <div class="md">
+                {{blog.createdAt | dateFormat("MD")}}
+              </div>
+              <div class="time">
+                {{blog.createdAt | dateFormat("TIME")}}
+              </div>
+            </div>
           </div>
+          <div class="content-blog"></div>
         </div>
-        <div class="main-text" v-html="blog.content"></div>
+        <!--<div class="caption-sub">-->
+        <!--<div class="caption-info"></div>-->
+        <!--<div class="caption-numbers">-->
+        <!--<span class="view-count">阅读 123-->
+        <!--</span>-->
+        <!--<span class="like-count">点赞 25-->
+        <!--</span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="main-text" v-html="blog.content"></div>-->
       </div>
       <div class="side-right"></div>
     </div>
+    <base-foot></base-foot>
   </div>
 </template>
 <script>
   import BaseTop from '../components/BaseTop'
+  import BaseFoot from '../components/BaseFoot'
 
   export default {
     data() {
@@ -32,7 +48,8 @@
       }
     },
     components: {
-      'base-top': BaseTop
+      'base-top': BaseTop,
+      'base-foot': BaseFoot
     },
     mounted: function () {
       this.queryBlogOne();
@@ -51,57 +68,89 @@
           }
         ).catch();
       }
+    },
+    filters:{
+      dateFormat(createdAt, type) {
+        let date = new Date(createdAt);
+        if (type  === 'YEAR') {
+          console.log("year: " + date)
+          return date.getFullYear();
+        } else if (type === "MD") {
+          return (date.getMonth() + 1) + "/" + date.getDay();
+        } else if (type === "TIME") {
+          return date.getHours() + ":" + date.getMinutes();
+        }
+      }
     }
   }
 </script>
 <style>
   .deatil-wrap {
-    width: 1000px;
-    margin: 20px auto 0;
+    width: 1240px;
+    margin: 20px auto 40px;
   }
 
   .side-left {
-    width: 625px;
+    width: 890px;
     float: left;
   }
 
+  .side-left h1 {
+    font-size: 30px;
+    line-height: 1.5;
+    margin-top: 8px;
+    margin-bottom: 25px;
+    color: #333;
+  }
+
   .side-right {
-    width: 275px;
+    width: 300px;
     float: right;
   }
 
-  .caption {
-    padding: 0 10px;
-    font-size: 24px;
+  .left-tool {
+    width: 80px;
+    padding-right: 30px;
+    margin-right: 30px;
+    text-align: center;
   }
 
-  .caption-sub {
-    width: 100%;
-    margin-top: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #ebebeb;
+  .left-tool .year {
+    color: #000;
+    font-family: Politica;
+    font-size: 20px;
   }
 
-  .caption-numbers {
-    float: right;
-    width: 200px;
+  .left-tool .year span {
+    display: inline-block;
+    background: #fff;
+    padding: 0 5px;
   }
 
-  .caption-sub:after {
-    content: '';
-    display: block;
-    height: 0;
-    font-size: 0;
+  .left-tool .md {
+    color: #000;
+    font-family: Politica;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .left-tool .time {
+    font-size: 20px;
+    color: #000;
+    font-family: Politica;
+    margin-bottom: 25px;
+  }
+
+  .tool-wrap {
+    position: relative;
+    width: 80px;
+    transition: all .5s;
+
+  }
+
+  .clearfix:after {
     clear: both;
-    overflow: hidden;
-    visibility: hidden;
-  }
-
-  .like-count {
-    margin-left: 10px;
-  }
-  .main-text{
-    margin-top: 20px;
-    min-height: 600px;
+    content: "";
+    display: block;
   }
 </style>
