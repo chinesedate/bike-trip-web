@@ -7,6 +7,7 @@ import SignUp from '@/components/SignUp'
 import Blog from '@/components/Blog'
 import AddBlog from '@/components/AddBlog'
 import RideTeam from '@/components/pages/RideTeam'
+import Author from '@/components/pages/Author'
 
 
 Vue.use(Router)
@@ -29,9 +30,9 @@ export default new Router({
       component: SignIn
     },
     {
-      path:'/join',
-      name:'SignUp',
-      component:SignUp
+      path: '/join',
+      name: 'SignUp',
+      component: SignUp
     },
     {
       path: '/blog/detail/:id',
@@ -39,14 +40,19 @@ export default new Router({
       component: Blog
     },
     {
-      path:'/blog/edit',
-      name:'AddBlog',
-      component:AddBlog
+      path: '/blog/edit',
+      name: 'AddBlog',
+      component: AddBlog
     },
     {
-      path:'/ride/team',
-      name:'RideTeam',
-      component:RideTeam
+      path: '/author/:id',
+      name: 'Author',
+      component: Author
+    },
+    {
+      path: '/ride/team',
+      name: 'RideTeam',
+      component: RideTeam
     }
   ]
 })
