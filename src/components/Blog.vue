@@ -19,11 +19,11 @@
               <div>
                 <router-link :to="{name:'Author', params:{id:blog}}" target="_blank">
                   <div class="author-avatar">
-                    <img class="avatar" v-if="blog.author.avatarUrl" :src="blog.avatarUrl" alt="用户头像">
+                    <img class="avatar" v-if="blog.author.avatarUrl" :src="blog.author.avatarUrl" alt="用户头像">
                     <img class="avatar" v-else src="../assets/user/default_avatar.jpeg" alt="用户头像">
                   </div>
                   <div class="author-nickname">
-                  <span>{{blog.author.nickname}}</span>
+                    <span>{{blog.author.nickname}}</span>
                   </div>
                 </router-link>
               </div>
@@ -57,18 +57,24 @@
     data() {
       return {
         id: this.$route.params.id,
-        blog: {}
+        blog: {
+          author: {}
+        }
       }
     },
     components: {
       'base-top': BaseTop,
       'base-foot': BaseFoot
     },
-    mounted: function () {
+    created: function () {
+      console.log("created.....................................");
       this.queryBlogOne();
+
     },
     methods: {
       queryBlogOne: function () {
+        console.log("querying......................")
+
         const self = this;
         self.$ajax({
           method: 'get',
@@ -77,18 +83,19 @@
           function (res) {
             if (res.data.status === 1) {
               self.blog = res.data.data;
+              console.log(self.blog);
             }
           }
         ).catch();
       }
     },
-    filters:{
+    filters: {
       dateFormat(createdAt, type) {
         let date = new Date(createdAt);
-        if (type  === 'YEAR') {
+        if (type === 'YEAR') {
           return date.getFullYear();
         } else if (type === "MD") {
-          return (date.getMonth() < 9 ? "0" : "") + (date.getMonth() + 1) + "/" + (date.getDate() < 10 ? "0" : "") +  date.getDate();
+          return (date.getMonth() < 9 ? "0" : "") + (date.getMonth() + 1) + "/" + (date.getDate() < 10 ? "0" : "") + date.getDate();
         } else if (type === "TIME") {
           return date.getHours() + ":" + date.getMinutes();
         }
@@ -160,27 +167,30 @@
 
   }
 
-  .author-avatar{
+  .author-avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto;
   }
+
   .avatar {
     width: 100%;
     height: 100%;
   }
+
   .author-nickname {
     margin-top: 10px;
   }
+
   .clearfix:after {
     clear: both;
     content: "";
     display: block;
   }
 
-  .content-blog{
+  .content-blog {
     min-height: 700px;
   }
 </style>
