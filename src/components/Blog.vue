@@ -33,16 +33,6 @@
             <div v-html="blog.content"></div>
           </div>
         </div>
-        <!--<div class="caption-sub">-->
-        <!--<div class="caption-info"></div>-->
-        <!--<div class="caption-numbers">-->
-        <!--<span class="view-count">阅读 123-->
-        <!--</span>-->
-        <!--<span class="like-count">点赞 25-->
-        <!--</span>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="main-text" v-html="blog.content"></div>-->
       </div>
       <div class="side-right"></div>
     </div>

@@ -1,8 +1,28 @@
 <template>
   <div class="add-blog-container">
     <base-top></base-top>
-    <div class="content-save-container">
-      <input type="button" value="保存" @click="saveContent()">
+    <!--<div class="content-save-container">-->
+    <!--<input type="button" value="保存" @click="saveContent()">-->
+    <!--</div>-->
+    <div class="title-container">
+      <div class="title-image-wrap">
+        <el-upload
+          class="title-image-uploader"
+          action=""
+          :http-request="imageUpload"
+          :show-file-list="false"
+          :on-success="uploadSuccessTitleImage"
+          :before-upload="beforeUpload">
+          <img v-if="titleImageUrl" :src="titleImageUrl" class="avatar">
+          <i v-else class="el-icon-plus title-image-uploader-icon"></i>
+        </el-upload>
+      </div>
+      <div class="title-text-wrap">
+        <!--<span class="title-tip" v-show="blogTitleStatus">输入游记标题</span>-->
+        <input class="title-text" v-model="blogTitle" @click="titleTip = ''" @blur="showTitleTip()"
+               :placeholder="titleTip" autocomplete="off">
+
+      </div>
     </div>
     <div class="content-container">
       <div class="blog-title-image-container">
@@ -33,7 +53,7 @@
       </div>
     </div>
 
-    <base-foot class="foot-container"></base-foot>
+    <!--<base-foot class="foot-container"></base-foot>-->
     <el-upload
       class="avatar-uploader-hide"
       action=""
@@ -49,11 +69,12 @@
 </template>
 <script>
   import BaseTop from '../components/BaseTop';
-  import BaseFoot from './BaseFoot'
+  // import BaseFoot from './BaseFoot'
 
   export default {
     data() {
       return {
+        titleTip: "输入游记标题（最多50个字）",
         blogTitleStatus: true,
         blogTitle: "",
         content: "",
@@ -104,14 +125,19 @@
           scrollingContainer: ".blog-content-editor"
 
         },
-        titleImageUrl:""   // 题图地址
+        titleImageUrl: ""   // 题图地址
       }
     },
     components: {
       'base-top': BaseTop,
-      'base-foot': BaseFoot
+      // 'base-foot': BaseFoot
     },
     methods: {
+      showTitleTip() {
+        if (this.blogTitle.toString() === "") {
+          this.titleTip = "输入游记标题（最多50个字）";
+        }
+      },
       showBlogTitleTip() {
         if (this.blogTitle.toString() === "") {
           this.blogTitleStatus = true;
@@ -198,11 +224,11 @@
 
       },
     },
-    directives:{
-      focus:{
-       inserted:function () {
+    directives: {
+      focus: {
+        inserted: function () {
 
-       }
+        }
       }
     }
   }
@@ -216,19 +242,41 @@
     margin: 0 auto;
     padding-bottom: 300px;
   }
+
+  .title-image-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    /*overflow: hidden;*/
+    /*border-color: #409EFF;*/
+  }
+
+  .title-image-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+
+  .title-image-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 280px;
+    height: 178px;
+    line-height: 178px;
+
+  }
 </style>
 <style scoped>
   .add-blog-container {
     overflow-y: visible;
   }
 
-  .content-save-container {
-    position: fixed;
-    top: 150px;
-    right: 100px;
-    width: 40px;
-    height: 40px;
-  }
+  /*.content-save-container {*/
+  /*position: fixed;*/
+  /*top: 150px;*/
+  /*right: 100px;*/
+  /*width: 40px;*/
+  /*height: 40px;*/
+  /*}*/
 
   .content-container {
     margin-top: 38px;
@@ -248,7 +296,7 @@
 
   .blog-title {
     resize: none;
-    height: 50px;
+    height: 100%;
     width: 100%;
     font-size: 34px;
     line-height: 50px;
@@ -269,7 +317,7 @@
     outline: none;
   }
 
-  .blog-title-image-container{
+  .blog-title-image-container {
     width: 770px;
     margin: 0 auto;
   }
@@ -286,9 +334,11 @@
     position: relative;
     overflow: hidden;
   }
+
   .avatar-uploader .el-upload:hover {
     border-color: #409EFF;
   }
+
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
@@ -297,9 +347,50 @@
     line-height: 178px;
     text-align: center;
   }
+
   .avatar {
     width: 770px;
     height: 178px;
     display: block;
+  }
+
+  .title-container {
+    height: 640px;
+    background: #f7f8f9;
+    position: relative;
+  }
+
+  .title-image-wrap {
+    width: 280px;
+    height: 178px;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100px;
+  }
+
+  .title-text-wrap {
+    width: 868px;
+    height: 20px;
+    padding: 20px 0;
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 25px;
+    background: #fff;
+  }
+
+  .title-text {
+    resize: none;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background: 0 0;
+    border-style: none;
+    outline: none;
+    font-size: 18px;
+    padding: 0 20px;
   }
 </style>

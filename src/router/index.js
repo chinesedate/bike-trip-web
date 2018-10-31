@@ -8,6 +8,11 @@ import Blog from '@/components/Blog'
 import AddBlog from '@/components/AddBlog'
 import RideTeam from '@/components/pages/RideTeam'
 import Author from '@/components/pages/Author'
+import Friend from '@/components/pages/Friend'
+import Favoriate from '@/components/pages/Favoriate'
+import HomeStay from '@/components/pages/HomeStay'
+import Route from '@/components/pages/Route'
+import Store from '@/components/pages/Store'
 
 
 Vue.use(Router)
@@ -53,6 +58,31 @@ export default new Router({
       path: '/ride/team',
       name: 'RideTeam',
       component: RideTeam
+    },
+    {
+      path:'/friend',
+      name:'Friend',
+      component:Friend
+    },
+    {
+      path:'/favoriate',
+      name:'Favoriate',
+      component:Favoriate
+    },
+    {
+      path:'/homestay',
+      name:'HomeStay',
+      component:HomeStay
+    },
+    {
+      path:'/route',
+      name:'Route',
+      component:Route
+    },
+    {
+      path:'/store',
+      name:'Store',
+      component:Store
     }
   ]
 })
