@@ -1,9 +1,6 @@
 <template>
   <div class="add-blog-container">
     <base-top></base-top>
-    <!--<div class="content-save-container">-->
-    <!--<input type="button" value="保存" @click="saveContent()">-->
-    <!--</div>-->
     <div class="title-container">
       <div class="title-image-wrap">
         <el-upload
@@ -17,34 +14,24 @@
           <i v-else class="el-icon-plus title-image-uploader-icon"></i>
         </el-upload>
       </div>
-      <div class="title-text-wrap">
-        <!--<span class="title-tip" v-show="blogTitleStatus">输入游记标题</span>-->
-        <input class="title-text" v-model="blogTitle" @click="titleTip = ''" @blur="showTitleTip()"
-               :placeholder="titleTip" autocomplete="off">
-
-      </div>
+    </div>
+    <div class="title-text-wrap">
+      <input class="title-text" v-model="blogTitle" @click="titleTip = ''" @blur="showTitleTip()"
+             :placeholder="titleTip" autocomplete="off">
     </div>
     <div class="content-container">
-      <div class="blog-title-image-container">
-        <el-upload
-          class="avatar-uploader"
-          action=""
-          :http-request="imageUpload"
-          :show-file-list="false"
-          :on-success="uploadSuccessTitleImage"
-          :before-upload="beforeUpload">
-          <img v-if="titleImageUrl" :src="titleImageUrl" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
-      </div>
-      <div class="blog-content-container">
-        <div class="blog-title-edit">
-          <span class="blog-title-tip" v-show="blogTitleStatus">请输入标题</span>
-          <textarea class="blog-title" v-model="blogTitle" @click="blogTitleStatus = false" @blur="showBlogTitleTip"
-                    autocomplete="off"></textarea>
+      <div class="content-ctrl">
+        <div class="ctrl-button">
+          <el-button type="text">保存草稿</el-button>
+        </div>
+        <div class="ctrl-button">
+          <el-button type="text">预览</el-button>
+        </div>
+        <div class="ctrl-button">
+          <el-button type="text">发布游记</el-button>
         </div>
       </div>
-      <div class="blog-content-editor">
+      <div class="blog-content-editor" @click="moveScrollBar($event)">
         <quill-editor v-model="content"
                       ref="blogQuillEditor"
                       :options="editorOption"
@@ -52,7 +39,6 @@
         </quill-editor>
       </div>
     </div>
-
     <!--<base-foot class="foot-container"></base-foot>-->
     <el-upload
       class="avatar-uploader-hide"
@@ -92,8 +78,8 @@
           modules: {
             toolbar: {
               container: [
-                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-                ['blockquote', 'code-block'],
+                ['bold', 'italic'],        // toggled buttons
+                // ['blockquote', 'code-block'],
 
                 [{'header': 1}, {'header': 2}],               // custom button values
                 [{'list': 'ordered'}, {'list': 'bullet'}],
@@ -104,12 +90,13 @@
                 // [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
                 // [{'header': [1, 2, 3, 4, 5, 6, false]}],
 
-                [{'color': []}, {'background': []}],          // dropdown with defaults from theme
-                [{'font': []}],
-                [{'align': []}],
+                // [{'color': []}, {'background': []}],          // dropdown with defaults from theme
+                // [{'font': []}],
+                // [{'align': []}],
                 ['link', 'image', 'video']
                 // ['clean']                                         // remove formatting button
               ],
+              // container: '#toolbar',
               handlers: {
                 'image': function (value) {
                   if (value) {
@@ -122,7 +109,7 @@
               }
             }
           },
-          scrollingContainer: ".blog-content-editor"
+          scrollingContainer: ".add-blog-container"
 
         },
         titleImageUrl: ""   // 题图地址
@@ -146,6 +133,18 @@
       show(event) {
         // console.log(event.target.innerHTML)
         // console.log("x:" + event.offsetX + "  y:" + event.offsetY)
+      },
+      moveScrollBar(event) {
+
+        console.log("x:" + event.clientX + "  y:" + event.clientY + " screen:" + window.innerHeight)
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+        let height = window.innerHeight - event.clientY;
+        if (height <= 100) {
+          console.log("height:" + height)
+          window.scrollBy(0, 100 - height)
+        }
+
       },
       beforeUpload() {
 
@@ -236,11 +235,14 @@
 <style>
   .quill-editor:not(.bubble) .ql-container,
   .quill-editor:not(.bubble) .ql-container .ql-editor {
-
     height: auto;
     min-height: 300px;
     margin: 0 auto;
-    padding-bottom: 300px;
+    line-height: 3;
+  }
+
+  .ql-container.ql-snow, .ql-toolbar.ql-snow {
+    border: none;
   }
 
   .title-image-uploader .el-upload {
@@ -279,12 +281,14 @@
   /*}*/
 
   .content-container {
-    margin-top: 38px;
+    width: 870px;
+    margin: 40px auto;
   }
 
-  .blog-content-container {
-    width: 770px;
-    margin: 0 auto;
+  .content-container:after {
+    content: "";
+    display: block;
+    clear: both;
   }
 
   .blog-title-tip {
@@ -310,7 +314,9 @@
 
   .blog-content-editor {
     width: 770px;
-    margin: 20px auto 0;
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 100px;
   }
 
   .custom-button {
@@ -348,12 +354,6 @@
     text-align: center;
   }
 
-  .avatar {
-    width: 770px;
-    height: 178px;
-    display: block;
-  }
-
   .title-container {
     height: 640px;
     background: #f7f8f9;
@@ -367,23 +367,19 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 100px;
+    top: 0;
+    bottom: 0;
   }
 
   .title-text-wrap {
-    width: 868px;
+    width: 870px;
     height: 20px;
-    padding: 20px 0;
-    margin: 0 auto;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 25px;
-    background: #fff;
+    padding: 30px 0 10px;
+    margin: 10px auto;
+    border-bottom: 1px dashed black;
   }
 
   .title-text {
-    resize: none;
     height: 100%;
     width: 100%;
     overflow: auto;
@@ -392,5 +388,11 @@
     outline: none;
     font-size: 18px;
     padding: 0 20px;
+  }
+
+  .content-ctrl {
+    width: 60px;
+    height: 200px;
+    float: left;
   }
 </style>
