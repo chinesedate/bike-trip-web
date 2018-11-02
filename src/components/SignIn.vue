@@ -56,10 +56,11 @@
           function (res) {
             if (res.data.status === 1) {
               console.log("datetime:" + new Date().getTime());
+              console.log("userid:" + res.data.data.autoId);
               self.$store.commit('login',{
                 msg:100,
                 time:new Date().getTime(),
-                userid:res.data.data.autoId
+                userid:res.data.data
               });
               self.$router.push("/");
             }

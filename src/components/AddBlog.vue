@@ -22,7 +22,7 @@
     <div class="content-container">
       <div class="content-ctrl">
         <div class="ctrl-button">
-          <el-button type="text">保存草稿</el-button>
+          <el-button type="text" @click="saveDraft()">保存草稿</el-button>
         </div>
         <div class="ctrl-button">
           <el-button type="text">预览</el-button>
@@ -224,6 +224,7 @@
 
       },
       saveDraft(){
+        console.log("userid:" + this.$store.state.userId);
         var blogData = new FormData();
         blogData.set("authorId", this.$store.state.userId);
         blogData.set("titleImageUrl", this.titleImageUrl);
