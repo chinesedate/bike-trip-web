@@ -58,7 +58,8 @@
               console.log("datetime:" + new Date().getTime());
               self.$store.commit('login',{
                 msg:100,
-                time:new Date().getTime()
+                time:new Date().getTime(),
+                userid:res.data.data.autoId
               });
               self.$router.push("/");
             }

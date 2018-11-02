@@ -203,6 +203,7 @@
       },
       saveContent() {
         var blogData = new FormData();
+        blogData.set("authorId", this.$store.state.userId);
         blogData.set("titleImageUrl", this.titleImageUrl);
         blogData.set("title", this.blogTitle);
         blogData.set("content", this.content);
@@ -222,6 +223,28 @@
         );
 
       },
+      saveDraft(){
+        var blogData = new FormData();
+        blogData.set("authorId", this.$store.state.userId);
+        blogData.set("titleImageUrl", this.titleImageUrl);
+        blogData.set("title", this.blogTitle);
+        blogData.set("content", this.content);
+        this.$ajax({
+          method: 'post',
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          url: '/blog/draft/save',
+          data: blogData
+        }).then(function (res) {
+            item.onSuccess(res.data)
+          }
+        ).catch(function (res) {
+            item.onError(res.data)
+          }
+        );
+
+      }
     },
     directives: {
       focus: {

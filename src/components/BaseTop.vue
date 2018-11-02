@@ -141,8 +141,14 @@
     list-style: none;
     align-items: center;
   }
+  .user-nav ul {
+    list-style: none;
+    width: 50px;
+    margin-top: 10px;
+  }
   .user-nav li {
     float:left;
+    padding: 5px 2px 0;
   }
 
   .dropdown {
@@ -178,9 +184,5 @@
     position: absolute;
     top: 20px;
     z-index: 1;
-  }
-
-  .user-nav ul {
-    list-style: none;
   }
 </style>
