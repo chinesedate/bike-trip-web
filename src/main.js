@@ -8,6 +8,7 @@ import ElementUI from 'element-ui'
 import axios from 'axios'
 import qs from 'qs';
 import base from './base'
+import httpin from '@/http/http'
 
 import VueQuillEditor from 'vue-quill-editor'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -45,13 +46,8 @@ new Vue({
       this.setToken('isLogin', '');
     }
 
-    if (this.getToken('userId') == null) {
-      this.setToken('userId', '');
-    }
-
     this.$store.state.isLogin = this.getToken('isLogin');
     this.$store.state.deadline = this.getToken('deadline');
-    this.store.state.userId = this.getToken('userId');
 
 
     // 判断本地存储中是否有tabNum，并更新vuex仓库

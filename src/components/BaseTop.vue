@@ -17,16 +17,25 @@
         <div class="d-flex">
           <ul class="user-nav d-flex">
             <li class="dropdown">
-              <div  v-if="isLogin" class="details-reset d-flex" @click.stop="showDetails">
+              <div v-if="isLogin" class="details-reset d-flex" @click.stop="showDetails">
                 <div>
                   <img src="../assets/user.png" height="20px" width="20px">
                   <span class="dropdown-caret"></span>
                 </div>
                 <ul v-if="showUserDropdown" class="user-dropdown-ul" v-click-outside="showDetails">
-                  <li><router-link to="/blog/edit">游记</router-link></li>
-                  <li><router-link to="/ride/team">组队</router-link></li>
-                  <li><router-link to="/friend">好友</router-link></li>
-                  <li><router-link to="/favoriate">收藏</router-link></li>
+                  <li>
+                    <router-link to="/blog/edit">游记</router-link>
+                  </li>
+                  <li>
+                    <router-link to="/ride/team">组队</router-link>
+                  </li>
+                  <li>
+                    <router-link to="/friend">好友</router-link>
+                  </li>
+                  <li>
+                    <router-link to="/favoriate">收藏</router-link>
+                  </li>
+                  <li @click="signOut()">退出</li>
                 </ul>
               </div>
               <div v-else>
@@ -60,6 +69,26 @@
     methods: {
       showDetails: function () {
         this.showUserDropdown = !this.showUserDropdown;
+      },
+      signOut: function () {
+        self.$ajax({
+            method:
+              'post',
+            url:
+              '/sign/out'
+          }
+        ).then(
+          function (res) {
+            if (res.data.status === 1) {
+
+              self.$store.commit('login', {
+                msg: '',
+                time: '0',
+              });
+              self.$router.push("/");
+            }
+          }
+        ).catch();
       }
     },
     directives: {
@@ -141,13 +170,15 @@
     list-style: none;
     align-items: center;
   }
+
   .user-nav ul {
     list-style: none;
     width: 50px;
     margin-top: 10px;
   }
+
   .user-nav li {
-    float:left;
+    float: left;
     padding: 5px 2px 0;
   }
 
