@@ -35,6 +35,7 @@
                   <li>
                     <router-link to="/favoriate">收藏</router-link>
                   </li>
+                  <li class="dropdown-divider"></li>
                   <li @click="signOut()">退出</li>
                 </ul>
               </div>
@@ -215,5 +216,11 @@
     position: absolute;
     top: 20px;
     z-index: 1;
+  }
+
+  .dropdown-divider {
+    background-color: #e1e4e8;
+    height: 1px;
+    margin: 8px 1px;
   }
 </style>
