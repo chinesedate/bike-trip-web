@@ -30,7 +30,13 @@
               <div class="blog-content">
                 <span class="blog-content-text" v-html="blog.briefIntroduction"></span>
               </div>
-              <div class="blog-actions"></div>
+              <div class="blog-actions">
+                <button>喜欢</button>
+                <button>评论</button>
+                <button>收藏</button>
+                <button>转发</button>
+                <button>打赏</button>
+              </div>
             </div>
           </div>
         </div>
@@ -165,6 +171,11 @@
   .right-container {
     flex: 1;
     font-size: 14px;
+  }
+
+  .blog-actions button {
+    border: none;
+    background-color: white;
   }
 
 </style>

@@ -36,7 +36,11 @@
                     <router-link to="/favoriate">收藏</router-link>
                   </li>
                   <li class="dropdown-divider"></li>
-                  <li @click="signOut()">退出</li>
+                  <li>
+                    <form @submit.prevent="signOut">
+                     <button type="submit">退出</button>
+                    </form>
+                  </li>
                 </ul>
               </div>
               <div v-else>
@@ -72,6 +76,7 @@
         this.showUserDropdown = !this.showUserDropdown;
       },
       signOut: function () {
+        let self = this;
         self.$ajax({
             method:
               'post',
