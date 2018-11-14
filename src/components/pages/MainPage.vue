@@ -31,7 +31,7 @@
                 <span class="blog-content-text" v-html="blog.briefIntroduction"></span>
               </div>
               <div class="blog-actions">
-                <button>喜欢</button>
+                <button @click="actionLike()">喜欢</button>
                 <button>评论</button>
                 <button>收藏</button>
                 <button>转发</button>
@@ -109,6 +109,10 @@
     min-height: 100vh;
   }
 
+  .blog-item {
+    padding: 20px;
+  }
+
   .blog-main {
     cursor: pointer;
     line-height: 1.67;
@@ -166,6 +170,8 @@
 
   .blog-actions {
     clear: both;
+    padding: 10px 20px;
+    margin: 0 -20px -10px;
   }
 
   .right-container {
@@ -207,6 +213,9 @@
         this.$store.commit('tab', {
           num: tabNum
         });
+      },
+      actionLike:function () {
+        
       }
     },
     computed: {
