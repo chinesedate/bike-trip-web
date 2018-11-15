@@ -3,7 +3,9 @@
     <base-top></base-top>
     <div class="title-container">
       <div class="title-image-wrap">
+        <img v-if="titleImageUrl" :src="titleImageUrl" class="title-image">
         <el-upload
+          v-else
           class="title-image-uploader"
           action=""
           :http-request="uploadTitleImage"
@@ -12,8 +14,7 @@
           :on-error="uploadErrorTitleImage"
           :before-upload="beforeTitleImageUpload"
           accept="image/jpg,image/jpeg,image/gif,image/png">
-          <img v-if="titleImageUrl" :src="titleImageUrl" class="title-image">
-          <i v-else class="el-icon-plus title-image-uploader-icon"></i>
+          <i class="el-icon-plus title-image-uploader-icon"></i>
         </el-upload>
       </div>
     </div>
@@ -76,7 +77,14 @@
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    height: 178px;
+    margin: auto;
     /*overflow: hidden;*/
     /*border-color: #409EFF;*/
   }
@@ -164,14 +172,14 @@
     border-color: #409EFF;
   }
 
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 770px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
+  /*.avatar-uploader-icon {*/
+  /*font-size: 28px;*/
+  /*color: #8c939d;*/
+  /*width: 770px;*/
+  /*height: 178px;*/
+  /*line-height: 178px;*/
+  /*text-align: center;*/
+  /*}*/
 
   .title-container {
     height: 640px;
@@ -180,14 +188,16 @@
   }
 
   .title-image-wrap {
-    width: 280px;
-    height: 178px;
-    margin: auto;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    /*width: 280px;*/
+    /*height: 178px;*/
+    /*margin: auto;*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+    width: 100%;
+    height: 100%;
   }
 
   .title-text-wrap {
@@ -216,7 +226,8 @@
   }
 
   .title-image {
-
+    width: 100%;
+    height: 100%;
   }
 </style>
 <script>
