@@ -31,7 +31,7 @@
           <el-button type="text">预览</el-button>
         </div>
         <div class="ctrl-button">
-          <el-button type="text">发布游记</el-button>
+          <el-button type="text" @click="saveContent()">发布游记</el-button>
         </div>
       </div>
       <div class="blog-content-editor" @click="moveScrollBar($event)">
@@ -390,7 +390,6 @@
       // 保存博客
       saveContent() {
         var blogData = new FormData();
-        blogData.set("authorId", this.$store.state.userId);
         blogData.set("titleImageUrl", this.titleImageUrl);
         blogData.set("title", this.blogTitle);
         blogData.set("content", this.content);
@@ -415,7 +414,6 @@
       saveDraft() {
         console.log("userid:" + this.$store.state.userId);
         var blogData = new FormData();
-        blogData.set("authorId", this.$store.state.userId);
         blogData.set("titleImageUrl", this.titleImageUrl);
         blogData.set("title", this.blogTitle);
         blogData.set("content", this.content);
